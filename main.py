@@ -1,12 +1,10 @@
-from usta_scrapers import scrape_uaid
-from get_teams_by_league import get_teams_by_league
+
+from get_uaids import get_uaids
+
+LEAGUE_NAME = "2025 USTA ADULT 18 & OVER - WS (WOMEN 3.0 - 18 & OVER – WS)"
 
 def main():
-    teams = get_teams_by_league("2025 USTA ADULT 18 & OVER - WS (WOMEN 3.0 - 18 & OVER – WS)")
-    print(teams)
-    player_name = "Lucy%20Sanders"
-    #uaid = scrape_uaid(player_name)
-    #print(uaid)
-
+    get_uaids(["Lucy Sanders", "Merrill Hunt"], LEAGUE_NAME)
+            
 if __name__ == "__main__":
     main()
