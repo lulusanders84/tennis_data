@@ -1,10 +1,9 @@
-
 from selenium.webdriver.remote.webdriver import WebDriver
 from abc import ABC, abstractmethod
 import time
 
-class Scraper(ABC):
 
+class Scraper(ABC):
     driver: WebDriver
     start_time = 0
     stop_time = 0
@@ -12,13 +11,13 @@ class Scraper(ABC):
     @abstractmethod
     def set_url(self):
         pass
-    
+
     @abstractmethod
     def set_driver(self):
         pass
 
     @abstractmethod
-    def scrape(self):
+    def scrape(self, player_identifier: str):
         pass
 
     @abstractmethod
@@ -27,7 +26,7 @@ class Scraper(ABC):
 
     def set_start_time(self):
         self.start_time = time.time()
-    
+
     def set_stop_time(self):
         self.stop_time = time.time()
         self.set_duration()
@@ -38,4 +37,3 @@ class Scraper(ABC):
     def stop_scrape(self):
         self.driver.quit()
         self.set_stop_time()
-

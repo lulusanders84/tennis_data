@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import re
 from ChromeScraper import ChromeScraper
 from usta_site_data import data as usta_site_data
+from classes import WTNs
 PLAYER_DISTRICT = "Colorado"
 
 class UAID_Scraper(ChromeScraper):
@@ -49,11 +50,20 @@ class WTN_Scraper(ChromeScraper):
     def set_url(self, uaid):
         self.url = self.data["url"](uaid)
    
-    def scrape(self, uaid) -> str:
+    def scrape(self, uaid) -> dict[str, str]:
         self.set_url(uaid)
         self.driver.get(self.url)
         
         wtn_elements = self.driver.find_elements(By.CLASS_NAME, self.data["class_name"])
-        return {"singles": wtn_elements[0].text, "doubles": wtn_elements[1].text}
+        wtns = {"singles": "--", "doubles": "--"}
+        for element in wtn_elements:
+            header = element.find_element(By.TAG_NAME, "h5").text.lower()
+            print(header)
+            wtn_value = element.find_element(By.CLASS_NAME, "v-form-wtn-widget__section-value").text
+            if re.search("singles", header) is not None:
+                wtns["singles"] = wtn_value
+            else:
+                wtns["doubles"] = wtn_value
+        return wtns
 
 

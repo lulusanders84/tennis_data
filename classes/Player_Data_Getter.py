@@ -9,7 +9,7 @@ class Player_Data_Getter():
         self.attribute = attribute
         self.identifier = identifier
     
-    def scrape(self, store: list[Player]):
+    def scrape(self):
         print(f"Processing {self.player.name}...")
         player_identifier = getattr(self.player, self.identifier).replace(" ", "%20")
         attempts = 1
@@ -21,7 +21,6 @@ class Player_Data_Getter():
         if datum is not None:
             print(f"{self.attribute} found...")
             self.player.__setattr__(self.attribute, datum)
-            store.append(self.player)
         else:
             print(f"{self.attribute} for {self.player.name} not found")
     

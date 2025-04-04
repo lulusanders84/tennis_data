@@ -6,6 +6,6 @@ data = {
     },
     "wtn_search": {
         "url": lambda uaid: f"https://www.usta.com/en/home/play/player-search/profile.html#uaid={uaid}&tab=tournaments",
-        "class_name": "v-form-wtn-widget__section-value"
+        "class_name": "v-form-wtn-widget__section"
     }
 }
